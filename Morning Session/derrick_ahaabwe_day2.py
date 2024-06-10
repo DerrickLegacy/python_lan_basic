@@ -9,48 +9,48 @@
 # else:
 #     print("You are a youth")  
     
-# #90> - Excellent
-# #80> - Very Good
-# #70 - Good
-# #Otherwise - Not Good 
+#90> - Excellent
+#80> - Very Good
+#70 - Good
+#Otherwise - Not Good 
 
-# grade = 88
+grade = 88
 
-# if grade >= 90:
-#     print("Excellent")
+if grade >= 90:
+    print("Excellent")
 
-# elif grade >= 80:
-#     print("Very Good")
-# elif grade >= 70:
-#     print("Good")
+elif grade >= 80:
+    print("Very Good")
+elif grade >= 70:
+    print("Good")
 
-# else:
-#     print("Not Good ")  
+else:
+    print("Not Good ")  
     
     
     
 # Exercise: 
 
-# full_price = 2000
-# age = int(input("Enter your age: "))
+full_price = 2000
+age = int(input("Enter your age: "))
 
-# if age < 13:
-#     discount = 1000
-#     price = full_price - discount
-#     print("Child Price: ", price)
+if age < 13:
+    discount = 1000
+    price = full_price - discount
+    print("Child Price: ", price)
     
-# elif age >= 13 and age < 18:
-#     discount = 500
-#     price = full_price - discount
-#     print("Teenager Price: ", price)
+elif age >= 13 and age < 18:
+    discount = 500
+    price = full_price - discount
+    print("Teenager Price: ", price)
     
-# elif age >= 18 and age < 45:
-#     price = full_price
-#     print("Youth Price: ", price)
+elif age >= 18 and age < 45:
+    price = full_price
+    print("Youth Price: ", price)
 
-# else:
-#     price = 5000
-#     print("Senior Citizen: ", price)
+else:
+    price = 5000
+    print("Senior Citizen: ", price)
     
 # Loops
 """_summary_
