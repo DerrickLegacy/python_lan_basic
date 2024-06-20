@@ -28,7 +28,7 @@ class Animal:
         return "Mwe Mwe Mwe Mwe Mwe"
 
 
-class Dog(Animal):
+class Doog(Animal):
     def speak(self):
         return "Barks"
 
@@ -36,7 +36,7 @@ class Dog(Animal):
 # Implementatiion of inherited classes
 
 animal = Animal()
-dog = Dog()
+dog = Doog()
 
 print(animal.speak())
 print(dog.speak())
@@ -49,17 +49,17 @@ print(dog.speak())
 
 
 # How polymorphism works in python
-class Animal:
+class Animaal:
     def speak(self):
         return "Mwe Mwe Mwe Mwe Mwe"
 
 
-class Dog(Animal):
+class Dog(Animaal):
     def speak(self):
         return "Barks"
 
 
-class Snake(Animal):
+class Snake(Animaal):
     def speak(self):
         return "Hisses"
 
@@ -232,4 +232,62 @@ with open('derrick.json', 'r') as json_file:
     print(student_data)
     
 # Exercise:
+# 1. Write and read XML
+# 2. Using abstraction calculate the area and perimeter of a rectangle
+
+
+import xml.etree.ElementTree as ET
+from abc import ABC, abstractmethod
+
+# Part 1: Write XML
+def write_xml():
+    root = ET.Element("shapes")
+    rectangle = ET.SubElement(root, "rectangle")
+    ET.SubElement(rectangle, "width").text = "10"
+    ET.SubElement(rectangle, "height").text = "5"
+    tree = ET.ElementTree(root)
+    tree.write("shapes.xml")
+
+# Part 1: Read XML
+def read_xml():
+    tree = ET.parse('shapes.xml')
+    root = tree.getroot()
+    for rectangle in root.findall('rectangle'):
+        width = int(rectangle.find('width').text)
+        height = int(rectangle.find('height').text)
+        print(f"Rectangle: Width={width}, Height={height}")
+        return width, height
+
+# Part 2: Calculate Area and Perimeter Using Abstraction
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+# Main Execution
+if __name__ == "__main__":
+    # Write and read XML
+    write_xml()
+    width, height = read_xml()
+
+    # Calculate area and perimeter
+    rect = Rectangle(width, height)
+    print(f"Area of rectangle: {rect.area()}")
+    print(f"Perimeter of rectangle: {rect.perimeter()}")
+
 
