@@ -354,8 +354,66 @@ for employee in root.findall('employee'):
 
 from abc import ABC, abstractmethod
 
+class Shape(ABC):
+  """
+  This abstract class represents a generic shape.
+  """
+
+  @abstractmethod
+  def calculate_area(self):
+    """
+    This method calculates the area of the shape.
+    Needs to be implemented by subclasses.
+    """
+    pass
+
+  @abstractmethod
+  def calculate_perimeter(self):
+    """
+    This method calculates the perimeter of the shape.
+    Needs to be implemented by subclasses.
+    """
+    pass
+
+class Rectangle(Shape):
+  """
+  This class represents a rectangle shape.
+  """
+  def __init__(self, width, height):
+    """
+    Initializes a rectangle object with the given width and height.
+    """
+    self.width = width
+    self.height = height
+
+  def calculate_area(self):
+    """
+    Calculates the area of the rectangle.
+    """
+    return self.width * self.height
+
+  def calculate_perimeter(self):
+    """
+    Calculates the perimeter of the rectangle.
+    """
+    return 2 * (self.width + self.height)
+
+# Create a rectangle object
+rectangle = Rectangle(5, 3)
+
+# Calculate and print the area
+area = rectangle.calculate_area()
+print("Area of the rectangle:", area)
+
+# Calculate and print the perimeter
+perimeter = rectangle.calculate_perimeter()
+print("Perimeter of the rectangle:", perimeter)
+
+
+from abc import ABC, abstractmethod
+
 class Animal(ABC):
-    # @abstractmethod
+    @abstractmethod
     def doAction(self):
         pass
     
@@ -380,6 +438,6 @@ class Lion(Animal):
     def getGender(self):
         print(self.sex);   
         
-a = Animal()#- throws an error
+# a = Animal()#- throws an error
 lion = Lion('male')
 lion.getGender()
