@@ -172,7 +172,7 @@ with open("derrick.txt", "w") as file:
     file.write("This is my first file\n")
     file.write("I love python programming.")
 
-    
+
 # Read
 with open("derrick.txt", "r") as file:
     print(file.read())
@@ -190,16 +190,17 @@ with open("derrick.txt", "r") as file:
 """
 # Example:
 import csv
+import xml.sax.handler
 
-# 1 Writing 
-with open('derrick.csv', 'w', newline='') as csv_file:
-     csv_writer = csv.writer(csv_file)
-     csv_writer.writerow(['Name', 'Age'])
-     csv_writer.writerow(['Derrick', '15'])
-     csv_writer.writerow(['Ahaabwe', '16'])
+# 1 Writing
+with open("derrick.csv", "w", newline="") as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(["Name", "Age"])
+    csv_writer.writerow(["Derrick", "15"])
+    csv_writer.writerow(["Ahaabwe", "16"])
 
-# Read csv file  
-with open('derrick.csv', 'r') as csv_file:
+# Read csv file
+with open("derrick.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file)
     for line in csv_reader:
         print(line)
@@ -218,30 +219,70 @@ print("JSON ,XML files")
 import json
 
 # Write
-student_data =  {
-            'name': 'Derrick',
-            'age': 15,
-            'year':3
-        }
-with open('derrick.json', 'w') as json_file:
-    json.dump( student_data,json_file)
+student_data = {"name": "Derrick", "age": 15, "year": 3}
+with open("derrick.json", "w") as json_file:
+    json.dump(student_data, json_file)
 
 # Read the file
-with open('derrick.json', 'r') as json_file:
+with open("derrick.json", "r") as json_file:
     student_data = json.load(json_file)
     print(student_data)
-    
+
 # Exercise:
 # 1. Write and read XML
 # 2. Using abstraction calculate the area and perimeter of a rectangle
 
+""" 
+        XML -Extensible Markup Language 
+    a) XML is extremely useful for keeping track of small to medium amounts of data without requiring an SQL- based backbone.
+        1.XML Modules(xml package)
+            xml.etree.ElementTree - the ElementTree API, a simple and lightweight XML processor
+            xml.dom - the DOM API definition.
+            xml.dom.minidom - a minimal DOM implementation.
+            xml.dom.pulldom - support for building partial DOM trees.
+            xml.sax - SAX2 base classes and convenience functions.
+            xml.parsers.expat - the Expat parser binding. 
+            
+            Most Used API to xml data
+            -SAX -Simple API for XML
+            -DOM
+            
+            SAX
+             -stanadrd interface for event driven xml parsing
+             -Requires we create our own content handler
+             -Requires calling startDocument and endDocument at start and end of xml file
+             -ContentHandler is called at the start and end of each element.
+             
+             The make_parser Method
+              xml.sax.make_parser( [parser_list] )- creates and returns a new parser object. parser_list is optional
+            
+            The parse Method
+              xml.sax.parse( xmlfile, contenthandler[, errorhandler])
+            The parseString Method
+              xml.sax.parseString(xmlstring, contenthandler[, errorhandler])
+             
+              *xmlfile - This is the name of the XML file to read from.             
+              *contenthandler - This must be a ContentHandler object.
+              *errorhandler - If specified, errorhandler must be a SAX ErrorHandler object.  
+
+"""
+
+# ElementTree XML API
+""" 
+    -Has an elemt tree module- a simple light weight XML processor API
+    -The 'ElementTree' in this module treats the whole XML document as a tree. 
+    -'Element' class represents a single node in this tree.
+    -Reading and writing operations on XML files are done on the ElementTree level
+    -Each element is characterised by tag and attribute in dict object format
+    -FOr trees, starting element, attrib is empty dictionary
+"""
 
 import xml.etree.ElementTree as ET
 
 # Create the root element
 root = ET.Element("shapes")
 
-# Create a rectangle element
+# a) CREATING OR WRITING XML FILE
 rectangle = ET.SubElement(root, "rectangle")
 ET.SubElement(rectangle, "width").text = "10"
 ET.SubElement(rectangle, "height").text = "5"
@@ -251,17 +292,94 @@ tree = ET.ElementTree(root)
 tree.write("shapes.xml")
 
 
-
-import xml.etree.ElementTree as ET
-
+# b) READING XML
 # Parse the XML file
-tree = ET.parse('shapes.xml')
+tree = ET.parse("shapes.xml")
 root = tree.getroot()
 
 # Iterate through elements and print their content
-for rectangle in root.findall('rectangle'):
-    width = rectangle.find('width')
-    height = rectangle.find('height')
+for rectangle in root.findall("rectangle"):
+    width = rectangle.find("width").text # type: ignore
+    height = rectangle.find("height").text # type: ignore
     print(f"Rectangle: Width={width}, Height={height}")
 
+# More: Constructing a tree out of a diction
+import xml.etree.ElementTree as et
 
+employeemployees=[{'name':'aaa','age':'21','sal':'5000'},{'name':'xyz','age':'22','sal':'6000'}]
+root = et.Element('employees')
+
+for employee in employeemployees:
+    child = et.SubElement(root,"employee")
+    name = et.SubElement(child,"name").text = employee['name']
+    age = et.SubElement(child,"age").text = employee['age']
+    salary = et.SubElement(child,"sal").text = employee['sal']
+    
+tree = et.ElementTree(root)
+# tree.write("employees.xml")
+print("Employees XML file created successfully")
+
+# writing using open()
+with open("employees.xml",'wb') as xml_file:
+    tree.write(xml_file)
+
+# Reading the employees       #   
+
+tree = et.parse('employees.xml')
+root = tree.getroot()
+
+for employee in root.findall('employee'):
+    name = employee.find('name').text # type: ignore
+    age = employee.find('age').text # type: ignore
+    sal= employee.find('sal').text # type: ignore
+    print(f"Name {name}, Age : {age}, Sal : {sal}")
+    
+
+# Abstraction 
+
+""" 
+    Abstract Classes
+        ● A class which contains one or more abstract methods is called an abstract class.
+        ● An abstract method is a method that has method declaration but not has any implementation(body).
+        ● An abstract class can be considered as a blueprint for other classes, allows you
+        to create a set of methods that must be created within any child classes built
+        from your abstract class.
+        ● Abstract classes cannot be instantiated(initialised with values using an object i.e can never have an object) 
+            and they need subclasses to provid implementations for those abstract methods which are defined in abstract classes.
+        ● Abstract classes having abstract methods only are called interfaces.
+        Classes implementing the abstract class can have their own methods
+
+        The abc module(from ABC helper class) provides the infrastructure for defining Abstract Base Classes (ABCs) in Python
+"""
+
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    # @abstractmethod
+    def doAction(self):
+        pass
+    
+class Human(Animal):
+    def doAction(self):
+        print("I can walk and run")
+
+class Snake(Animal):
+    def doAction(self):
+        print("I can crawl")
+
+class Dog(Animal):
+    def doAction(self):
+        print("I can bark")
+        
+class Lion(Animal):
+    def __init__(self, sex):
+        self.sex = sex
+    def doAction(self):
+        print("I can roar")   
+        
+    def getGender(self):
+        print(self.sex);   
+        
+a = Animal()#- throws an error
+lion = Lion('male')
+lion.getGender()
