@@ -361,18 +361,10 @@ class Shape(ABC):
 
   @abstractmethod
   def calculate_area(self):
-    """
-    This method calculates the area of the shape.
-    Needs to be implemented by subclasses.
-    """
     pass
 
   @abstractmethod
   def calculate_perimeter(self):
-    """
-    This method calculates the perimeter of the shape.
-    Needs to be implemented by subclasses.
-    """
     pass
 
 class Rectangle(Shape):
