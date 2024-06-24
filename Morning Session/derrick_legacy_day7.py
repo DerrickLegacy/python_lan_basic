@@ -23,20 +23,20 @@ Derived class (child class): Class that inherits attributes and properties from 
 # Example 1: Syntax Create a class where a dog inherits from animal and overrides with a speak method
 
 
-class Animal:
+class Animall:
     def speak(self):
         return "Mwe Mwe Mwe Mwe Mwe"
 
 
-class Doog(Animal):
+class Dogg(Animall):
     def speak(self):
         return "Barks"
 
 
 # Implementatiion of inherited classes
 
-animal = Animal()
-dog = Doog()
+animal = Animall()
+dog = Dogg()
 
 print(animal.speak())
 print(dog.speak())
@@ -54,12 +54,12 @@ class Animaal:
         return "Mwe Mwe Mwe Mwe Mwe"
 
 
-class Dog(Animaal):
+class Do0g(Animaal):
     def speak(self):
         return "Barks"
 
 
-class Snake(Animaal):
+class Snaake(Animaal):
     def speak(self):
         return "Hisses"
 
@@ -68,7 +68,7 @@ def make_animal_speak(animal):
     print(animal.speak())
 
 
-make_animal_speak(Snake())
+make_animal_speak(Snaake())
 
 # Exercise 1: Create a simple application to manage different types of vehicles. Implement derived class to demo inheritance and polymorphism.
 
@@ -299,43 +299,46 @@ root = tree.getroot()
 
 # Iterate through elements and print their content
 for rectangle in root.findall("rectangle"):
-    width = rectangle.find("width").text # type: ignore
-    height = rectangle.find("height").text # type: ignore
+    width = rectangle.find("width").text  # type: ignore
+    height = rectangle.find("height").text  # type: ignore
     print(f"Rectangle: Width={width}, Height={height}")
 
 # More: Constructing a tree out of a diction
 import xml.etree.ElementTree as et
 
-employeemployees=[{'name':'aaa','age':'21','sal':'5000'},{'name':'xyz','age':'22','sal':'6000'}]
-root = et.Element('employees')
+employeemployees = [
+    {"name": "aaa", "age": "21", "sal": "5000"},
+    {"name": "xyz", "age": "22", "sal": "6000"},
+]
+root = et.Element("employees")
 
 for employee in employeemployees:
-    child = et.SubElement(root,"employee")
-    name = et.SubElement(child,"name").text = employee['name']
-    age = et.SubElement(child,"age").text = employee['age']
-    salary = et.SubElement(child,"sal").text = employee['sal']
-    
+    child = et.SubElement(root, "employee")
+    name = et.SubElement(child, "name").text = employee["name"]
+    age = et.SubElement(child, "age").text = employee["age"]
+    salary = et.SubElement(child, "sal").text = employee["sal"]
+
 tree = et.ElementTree(root)
 # tree.write("employees.xml")
 print("Employees XML file created successfully")
 
 # writing using open()
-with open("employees.xml",'wb') as xml_file:
+with open("employees.xml", "wb") as xml_file:
     tree.write(xml_file)
 
-# Reading the employees       #   
+# Reading the employees       #
 
-tree = et.parse('employees.xml')
+tree = et.parse("employees.xml")
 root = tree.getroot()
 
-for employee in root.findall('employee'):
-    name = employee.find('name').text # type: ignore
-    age = employee.find('age').text # type: ignore
-    sal= employee.find('sal').text # type: ignore
+for employee in root.findall("employee"):
+    name = employee.find("name").text  # type: ignore
+    age = employee.find("age").text  # type: ignore
+    sal = employee.find("sal").text  # type: ignore
     print(f"Name {name}, Age : {age}, Sal : {sal}")
-    
 
-# Abstraction 
+
+# Abstraction
 
 """ 
     Abstract Classes
@@ -354,82 +357,105 @@ for employee in root.findall('employee'):
 
 from abc import ABC, abstractmethod
 
+
 class Shape(ABC):
-  """
-  This abstract class represents a generic shape.
-  """
+    @abstractmethod
+    def calculate_area(self):
+        pass
 
-  @abstractmethod
-  def calculate_area(self):
-    pass
+    @abstractmethod
+    def calculate_perimeter(self):
+        pass
 
-  @abstractmethod
-  def calculate_perimeter(self):
-    pass
 
 class Rectangle(Shape):
-  """
-  This class represents a rectangle shape.
-  """
-  def __init__(self, width, height):
-    """
-    Initializes a rectangle object with the given width and height.
-    """
-    self.width = width
-    self.height = height
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
 
-  def calculate_area(self):
-    """
-    Calculates the area of the rectangle.
-    """
-    return self.width * self.height
+    def calculate_area(self):
+        return self.width * self.height
 
-  def calculate_perimeter(self):
-    """
-    Calculates the perimeter of the rectangle.
-    """
-    return 2 * (self.width + self.height)
+    def calculate_perimeter(self):
+        return 2 * (self.width + self.height)
 
-# Create a rectangle object
+
 rectangle = Rectangle(5, 3)
-
-# Calculate and print the area
 area = rectangle.calculate_area()
 print("Area of the rectangle:", area)
 
-# Calculate and print the perimeter
 perimeter = rectangle.calculate_perimeter()
 print("Perimeter of the rectangle:", perimeter)
 
 
 from abc import ABC, abstractmethod
 
+
 class Animal(ABC):
     @abstractmethod
     def doAction(self):
         pass
-    
+
+
 class Human(Animal):
     def doAction(self):
         print("I can walk and run")
+
 
 class Snake(Animal):
     def doAction(self):
         print("I can crawl")
 
+
 class Dog(Animal):
     def doAction(self):
         print("I can bark")
-        
+
+
 class Lion(Animal):
     def __init__(self, sex):
         self.sex = sex
+
     def doAction(self):
-        print("I can roar")   
-        
+        print("I can roar")
+
     def getGender(self):
-        print(self.sex);   
-        
+        print(self.sex)
+
+
 # a = Animal()#- throws an error
-lion = Lion('male')
+lion = Lion("male")
 lion.getGender()
+""" 
+    Abstract properties
+    ● The Python built-in decorator @property allows  to declare read-only properties
+    ● @property can be combined with  @abc.abstractmethod in order to declare read-only abstract properties 
+"""
+
+from abc import ABC, abstractmethod
+
+class Animal1(ABC):
+    @abstractmethod
+    def doAction(self):
+        pass
+ 
+    @property
+    @abstractmethod
+    def gender(self):
+        pass
+
+class Human1(Animal1):
+    def __init__(self, gender):
+        print("I can walk and run")
+        self.__gender = gender
+
+    def doAction(self):
+        print("I can walk and run")
+
+    @property
+    def gender(self):
+        return self.__gender
+
+andrea = Human1("male")
+print("The human is " + andrea.gender)
+# print("The human is " + andrea.gender())
